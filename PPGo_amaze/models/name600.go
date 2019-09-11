@@ -8,14 +8,11 @@ import (
 )
 
 type Name600 struct {
-	Id       int
-	Code     string
-	Name     string
-	LastDate string
+	StockName
 }
 
 func (a *Name600) TableName() string {
-	return TableName("Name600")
+	return TableName("name_600")
 }
 
 func Name600Add(a *Name600) (int64, error) {
@@ -38,4 +35,35 @@ func Name600GetList() ([]*Name600, int64) {
 	//}
 
 	return list, total
+}
+
+func Name600GetById(id int) (*Name600, error) {
+	name := new(Name600)
+	o1 := orm.NewOrm()
+	o1.Using("hcs")
+	err := o1.QueryTable(TableName("name_600")).Filter("id", id).One(name)
+	if err != nil {
+		return nil, err
+	}
+	return name, nil
+}
+
+func Name600GetByCode(code string) (*Name600, error) {
+	name := new(Name600)
+	o1 := orm.NewOrm()
+	o1.Using("hcs")
+	err := o1.QueryTable(TableName("name_600")).Filter("code", code).One(name)
+	if err != nil {
+		return nil, err
+	}
+	return name, nil
+}
+
+func (a *Name600) Update(fields ...string) error {
+	o1 := orm.NewOrm()
+	o1.Using("hcs")
+	if _, err := o1.Update(a, fields...); err != nil {
+		return err
+	}
+	return nil
 }

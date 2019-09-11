@@ -61,7 +61,7 @@ func checkDate(code, lastDate string) (bool, string, string) {
 	mon := strings.Split(timeDate, "-")[1]
 	day := strings.Split(timeDate, "-")[2]
 	endDate := year + mon + day
-	startDate := "20100101"
+	startDate := "20160101"
 
 	if timeDate > lastDate {
 		t, _ := time.Parse("2006-01-02 15:04:05", lastDate+" 15:04:05")
@@ -86,9 +86,17 @@ func CalculateStock(stock models.StockName) (bool, string) {
 	res, startDate, endDate := checkDate(code, stock.LastDate)
 	if res {
 		beego.Info(fmt.Sprintf("[%s] start=%s end=%s.! ", code, startDate, endDate))
-		urlBody := fmt.Sprintf("code=1%s&start=%s&end=%s", code, startDate, endDate)
+		// 深证指数 和 创业板 拼接url code +1
+		// 上证指数 拼接url code +0
+		// TODO 优化分类方法
+		urlBody := ""
+		if codeint, _ := strconv.Atoi(code); codeint >= 600000 {
+			urlBody = fmt.Sprintf("code=0%s&start=%s&end=%s", code, startDate, endDate)
+		} else {
+			urlBody = fmt.Sprintf("code=1%s&start=%s&end=%s", code, startDate, endDate)
+		}
 		url := urlBegin + urlBody + urlEnd
-		//fmt.Println("Req URL '`%s' ", url)
+		// fmt.Println("Req URL '`%s' ", url)
 		respj, err := sendMsg(url)
 		if err != nil {
 			fmt.Fprintf(os.Stdout, "Err [%v]\n", err)

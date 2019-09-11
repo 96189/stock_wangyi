@@ -52,6 +52,32 @@ func (self *Stockindex) Index399() {
 	self.TplName = "stockindex/399001.html"
 }
 
+func (self *Stockindex) Index000001() {
+	fmt.Println("Into Index000001")
+	valueList := make([][]string, 0)
+	self.Data["pageTitle"] = "上证指数"
+
+	list, total := models.ValueGet("000001")
+	fmt.Println("Total %d", total)
+	for _, v := range list {
+		value := make([]string, 0)
+		value = append(value, v.Date)
+		value = append(value, strconv.FormatFloat(v.Topen, 'f', 2, 64))
+		value = append(value, strconv.FormatFloat(v.Tclose, 'f', 2, 64))
+		value = append(value, strconv.FormatFloat(v.Low, 'f', 2, 64))
+		value = append(value, strconv.FormatFloat(v.High, 'f', 2, 64))
+		value = append(value, strconv.FormatInt(v.Voturnover, 10))
+		valueList = append(valueList, value)
+	}
+	jValue, err := json.Marshal(valueList)
+	if err != nil {
+		fmt.Println("encoding failed")
+	}
+	self.Data["StockIndex"] = string(jValue)
+
+	self.TplName = "stockindex/000001.html"
+}
+
 func (self *Stockindex) Index300() {
 	fmt.Println("Into Index300")
 	valueList := make([][]string, 0)

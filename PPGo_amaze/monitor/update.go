@@ -24,6 +24,7 @@ func UpdateAndBackup() {
 	beego.Info("Begin Update! ")
 	InitializeChuangye()
 	InitializeShenzhen()
+	InitializeShanghai()
 	//BackupMysql()
 	beego.Info("Update Finish! ")
 }

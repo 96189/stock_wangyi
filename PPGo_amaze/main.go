@@ -30,9 +30,8 @@ func main() {
 	// And it have to before beego.Run
 	go func() {
 		m := &monitor.Monitor{
-			StartDate: "20100101",
-			//StartDate: "20170101",
-			EndDate: "20171231",
+			StartDate: "20160101",
+			EndDate: "20181231",
 		}
 		m.InitilizeDB()
 	}()
