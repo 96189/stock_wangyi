@@ -1,7 +1,7 @@
 package models
 
 import (
-	"fmt"
+	_ "fmt"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -58,11 +58,11 @@ func AuthGetListByIds(authIds string, userId int) ([]*Auth, error) {
 		_, err = o1.Raw("select id,auth_name,auth_url,pid,icon,is_show from pp_uc_auth where status=1 and id in("+authIds+") order by pid asc,sort asc", authIds).Values(&list)
 	}
 
-	for k, v := range list {
-		fmt.Println(k, v)
-	}
+	// for k, v := range list {
+	// 	fmt.Println(k, v)
+	// }
 
-	fmt.Println(list)
+	// fmt.Println(list)
 	return list1, err
 }
 

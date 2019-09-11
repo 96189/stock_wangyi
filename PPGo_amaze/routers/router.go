@@ -22,5 +22,8 @@ func init() {
 	beego.Router("/stockindex300", &controllers.Stockindex{}, "*:Index300")
 	// 个股
 	beego.Router("/stockindex", &controllers.Stockindex{}, "*:Index")
-
+	// AI分析
+	beego.Router("/chart", &controllers.AnalysisController{}, "*:Analyze")
+	// 重要新闻
+	beego.Router("/news", &controllers.NewsController{}, "*:News")
 }

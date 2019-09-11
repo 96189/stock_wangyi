@@ -1,7 +1,7 @@
 package models
 
 import (
-	"fmt"
+	_ "fmt"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -36,14 +36,14 @@ func AdminAdd(a *Admin) (int64, error) {
 
 func AdminGetByName(loginName string) (*Admin, error) {
 
-	fmt.Println("AdminGetByName")
+	// fmt.Println("AdminGetByName")
 	a := new(Admin)
 	o1 := orm.NewOrm()
 	o1.Using("hcs")
-	fmt.Println("use hcs")
+	// fmt.Println("use hcs")
 	err := o1.QueryTable(TableName("uc_admin")).Filter("login_name", loginName).One(a)
 	if err != nil {
-		fmt.Println("AdminGetByName Err `%v` ", err)
+		// fmt.Println("AdminGetByName Err `%v` ", err)
 		return nil, err
 	}
 	return a, nil

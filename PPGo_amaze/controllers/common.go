@@ -53,14 +53,14 @@ func (self *BaseController) auth() {
 	arr := strings.Split(self.Ctx.GetCookie("auth"), "|")
 	self.userId = 0
 
-	fmt.Println("arr len %d", len(arr))
+	// fmt.Println("arr len", len(arr))
 
 	if len(arr) == 2 {
 		idstr, password := arr[0], arr[1]
 		userId, _ := strconv.Atoi(idstr)
 
-		fmt.Println("userId %s", userId)
-		fmt.Println("password %s", password)
+		// fmt.Println("userId ", userId)
+		// fmt.Println("password ", password)
 
 		if userId > 0 {
 			user, err := models.AdminGetById(userId)

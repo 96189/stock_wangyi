@@ -19,12 +19,12 @@ type Stockindex struct {
 // [["2004-01-02",10452.74,10409.85,10367.41,10554.96,168890000],["2004-01-05",10411.85,10544.07,10411.85,10575.92,221290000]]
 
 func (self *Stockindex) Index399() {
-	fmt.Println("Into Index399")
+	// fmt.Println("Into Index399")
 	valueList := make([][]string, 0)
 	self.Data["pageTitle"] = "深成指"
 
 	list, total := models.ValueGet("399001")
-	fmt.Println("Total %d", total)
+	fmt.Println("399001 Total %d", total)
 	for _, v := range list {
 		value := make([]string, 0)
 		value = append(value, v.Date)
@@ -53,12 +53,12 @@ func (self *Stockindex) Index399() {
 }
 
 func (self *Stockindex) Index000001() {
-	fmt.Println("Into Index000001")
+	// fmt.Println("Into Index000001")
 	valueList := make([][]string, 0)
 	self.Data["pageTitle"] = "上证指数"
 
 	list, total := models.ValueGet("000001")
-	fmt.Println("Total %d", total)
+	fmt.Println("000001 Total %d", total)
 	for _, v := range list {
 		value := make([]string, 0)
 		value = append(value, v.Date)
@@ -71,7 +71,7 @@ func (self *Stockindex) Index000001() {
 	}
 	jValue, err := json.Marshal(valueList)
 	if err != nil {
-		fmt.Println("encoding failed")
+		// fmt.Println("encoding failed")
 	}
 	self.Data["StockIndex"] = string(jValue)
 
@@ -79,12 +79,12 @@ func (self *Stockindex) Index000001() {
 }
 
 func (self *Stockindex) Index300() {
-	fmt.Println("Into Index300")
+	// fmt.Println("Into Index300")
 	valueList := make([][]string, 0)
 	self.Data["pageTitle"] = "创业版"
 
 	list, total := models.ValueGet("399006")
-	fmt.Println("Total %d", total)
+	fmt.Println("399006 Total %d", total)
 	for _, v := range list {
 		value := make([]string, 0)
 		value = append(value, v.Date)
@@ -113,12 +113,12 @@ func (self *Stockindex) Index300() {
 }
 
 func (self *Stockindex) Index() {
-	fmt.Println("test Stockindex")
+	// fmt.Println("test Stockindex")
 
 	stockCode := strings.TrimSpace(self.GetString("code"))
 	stockType := strings.TrimSpace(self.GetString("type"))
 	stockFrom := strings.TrimSpace(self.GetString("from"))
-	fmt.Println("Stockindex %s %s %s", stockCode, stockType, stockFrom)
+	// fmt.Println("Stockindex %s %s %s", stockCode, stockType, stockFrom)
 	if 6 != len(stockCode) {
 		stockCode = "000001"
 	}

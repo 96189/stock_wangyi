@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"fmt"
+	_ "fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -25,10 +25,10 @@ func (self *LoginController) LoginIn() {
 	if self.isPost() {
 		username := strings.TrimSpace(self.GetString("username"))
 		password := strings.TrimSpace(self.GetString("password"))
-		fmt.Println("login %s", username)
+		// fmt.Println("login %s", username)
 		if username != "" && password != "" {
 			user, err := models.AdminGetByName(username)
-			fmt.Println(user)
+			// fmt.Println(user)
 			flash := beego.NewFlash()
 			errorMsg := ""
 			if err != nil || user.Password != libs.Md5([]byte(password+user.Salt)) {
